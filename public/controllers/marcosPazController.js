@@ -182,13 +182,6 @@ angular
 							$scope.forms.actividadListar.display=true;
 						}});
 				});
-			},
-			subirArchivos:()=>{
-				$scope.dialogs.autorizarSubirArchivo.display=true;
-			},
-			eliminarArchivos:(key)=>{
-				$scope.dialogs.autorizarEliminarArchivo.key=key;
-				$scope.dialogs.autorizarEliminarArchivo.display=true;
 			}
 		},
 		actividadModificar:{
@@ -211,13 +204,6 @@ angular
 						$scope.getLista();
 						$scope.forms.actividadListar.display=true;
 					}});
-			},
-			subirArchivos:()=>{
-				$scope.dialogs.autorizarSubirArchivo.display=true;
-			},
-			eliminarArchivos:(key)=>{
-				$scope.dialogs.autorizarEliminarArchivo.key=key;
-				$scope.dialogs.autorizarEliminarArchivo.display=true;
 			}
 		},
 		actividadVisualizar:{
@@ -306,6 +292,64 @@ angular
 			.get(uri)
 			.error(()=>{console.log(uri+' : No Data');})
 			.success((json)=>{if(json.result) $scope.lista = json.rows; });
+	};
+
+	$scope.upload = ()=>{
+		input = document.createElement('input');
+		input.multiple=false;
+		input.type='file';
+		input.lang='es';
+		input.accept='image/*';
+		input.click();
+		input.addEventListener('change',()=>{
+			for(i=0;i<input.files.length;i++){
+				file = input.files[i];
+				type = file.type;
+				if(type.toString().substring(0,5)==='image'){
+					reader = new FileReader();
+					reader.readAsDataURL(file);
+					reader.addEventListener('loadend',(object)=>{
+						if(reader.readyState===2){
+							img     = document.createElement('img');
+							img.src = reader.result;
+							img.addEventListener('load',()=>{
+								canvas        = document.createElement('canvas');
+								canvas.width  = 450;
+								canvas.height = parseInt(((parseInt(((100*canvas.width)/img.width))) *img.height) /100);
+								context       = canvas.getContext('2d');
+								context.drawImage(img,0,0,canvas.width,canvas.height);
+								$scope.modelo.archivos.push({
+									id:null,
+									archivo:canvas.toDataURL(type,0.8),
+									tipo:type,
+									resource:'local'
+								});
+								$scope.$apply();
+							});
+						}
+					});
+				}
+			}
+		});
+	};
+
+	$scope.delete=(key)=>{
+		if(confirm('¿Esta seguro de que desea eliminar este archivo?')){
+			if($scope.modelo.archivos[key].resource==='local'){
+				$scope.modelo.archivos.splice(key,1);
+			}
+			if($scope.modelo.archivos[key].resource==='remote'){
+				id  = $scope.modelo.archivos[key].id;
+				uri = $scope.routes.delete.archivo+id;
+				$http
+					.delete(uri)
+					.error(()=>{console.log(uri+' : No Data');})
+					.success((json)=>{if(json.result){
+						$scope.modelo.archivos.splice(key,1);
+					}});
+			}
+		}
+		
 	};
 
 	$scope.init = ()=>{

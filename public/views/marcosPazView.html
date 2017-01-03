@@ -112,44 +112,9 @@
                     <div class="input-field">
                         <div class="input-group-addon"><strong>ARCHIVOS</strong></div>
                     </div>
-                    <button ng-click="forms.actividadNuevo.subirArchivos()" class="btn btn-info" type="button">
+                    <button ng-click="upload()" class="btn btn-info" type="button">
                         Subir Archivo
                     </button>
-                                <!-- Dialog: Autorizar Subir Archivo -->
-                                <div ng-show="dialogs.autorizarSubirArchivo.display" class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <div class="panel panel-info">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    AUTORIZAR / Subir Archivo
-                                                </h4>
-                                            </div>
-                                            <div class="panel-body"><input id="archivos" type="file" lang="es" class="btn btn-success" multiple="true"  onchange="angular.element(this).scope().dialogs.autorizarSubirArchivo.onchange(this)"/></div>
-                                            <div class="panel-footer clearfix">
-                                                <button ng-click="dialogs.autorizarSubirArchivo.no()" class="btn btn-danger  pull-left">No</button>
-                                                <button ng-click="dialogs.autorizarSubirArchivo.si()" class="btn btn-success pull-right">Si</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                            
-                                <!-- Dialog: Autorizar Eliminar Archivo -->
-                                <div ng-show="dialogs.autorizarEliminarArchivo.display" class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <div class="panel panel-danger">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    AUTORIZAR / Eliminar Archivo
-                                                </h4>
-                                            </div>
-                                            <div class="panel-body">¿Esta seguro de que desea eliminar este archivo?</div>
-                                            <div class="panel-footer clearfix">
-                                                <button ng-click="dialogs.autorizarEliminarArchivo.no()" class="btn btn-danger  pull-left">No</button>
-                                                <button ng-click="dialogs.autorizarEliminarArchivo.si()" class="btn btn-success pull-right">Si</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                     <table class="table table-striped table-hover table-bordered table-responsive text-center">
                         <tr>
                             
@@ -165,7 +130,7 @@
                             </td>
                             <td>{{a.tipo}}</td>
                             <td>
-                                <button ng-click="forms.actividadNuevo.eliminarArchivos(k)" class="btn btn-danger btn-xs" alt="Eliminar Archivo" type="button">
+                                <button ng-click="delete(k)" class="btn btn-danger btn-xs" alt="Eliminar Archivo" type="button">
                                     <i class="glyphicon glyphicon-minus"></i>
                                 </button>
                             </td>
@@ -227,44 +192,9 @@
                     <div class="input-field">
                         <div class="input-group-addon"><strong>ARCHIVOS</strong></div>
                     </div>
-                    <button ng-click="forms.actividadModificar.subirArchivos()" class="btn btn-info" type="button">
+                    <button ng-click="upload()" class="btn btn-info" type="button">
                         Subir Archivo
                     </button>
-                                <!-- Dialog: Autorizar Subir Archivo -->
-                                <div ng-show="dialogs.autorizarSubirArchivo.display" class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <div class="panel panel-info">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    AUTORIZAR / Subir Archivo
-                                                </h4>
-                                            </div>
-                                            <div class="panel-body"><input id="archivos" type="file" lang="es" class="btn btn-success" multiple="true" onchange="angular.element(this).scope().dialogs.autorizarSubirArchivo.onchange(this)"/></div>
-                                            <div class="panel-footer clearfix">
-                                                <button ng-click="dialogs.autorizarSubirArchivo.no()" class="btn btn-danger  pull-left">No</button>
-                                                <button ng-click="dialogs.autorizarSubirArchivo.si()" class="btn btn-success pull-right">Si</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                            
-                                <!-- Dialog: Autorizar Eliminar Archivo -->
-                                <div ng-show="dialogs.autorizarEliminarArchivo.display" class="row">
-                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                        <div class="panel panel-danger">
-                                            <div class="panel-heading">
-                                                <h4 class="panel-title">
-                                                    AUTORIZAR / Eliminar Archivo
-                                                </h4>
-                                            </div>
-                                            <div class="panel-body">¿Esta seguro de que desea eliminar este archivo?</div>
-                                            <div class="panel-footer clearfix">
-                                                <button ng-click="dialogs.autorizarEliminarArchivo.no()" class="btn btn-danger  pull-left">No</button>
-                                                <button ng-click="dialogs.autorizarEliminarArchivo.si()" class="btn btn-success pull-right">Si</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
                     <table class="table table-striped table-hover table-bordered table-responsive text-center">
                         <tr>
                             <td><strong>ARCHIVO</strong></td>
@@ -277,7 +207,7 @@
                             </td>
                             <td>{{a.tipo}}</td>
                             <td>
-                                <button ng-click="forms.actividadModificar.eliminarArchivos(k)" class="btn btn-danger btn-xs" alt="Eliminar Archivo" type="button">
+                                <button ng-click="delete(k)" class="btn btn-danger btn-xs" alt="Eliminar Archivo" type="button">
                                     <i class="glyphicon glyphicon-minus"></i>
                                 </button>
                             </td>
